@@ -1,0 +1,30 @@
+{
+  "name": "opencode",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": true,
+  "overrideCommand": true,
+
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceFolder": "/workspace",
+
+  "containerEnv": {
+    "SSH_AUTH_SOCK": ""
+  },
+
+  "postCreateCommand": "bash -lc 'sudo apt-get update && sudo apt-get install -y curl ca-certificates && sudo install -d -o vscode -g vscode /home/vscode/.local /home/vscode/.local/share /home/vscode/.opencode /home/vscode/.opencode/bin && curl -fsSL https://opencode.ai/install | bash && export PATH=/home/vscode/.opencode/bin:/home/vscode/.local/bin:$PATH && command -v opencode && opencode --version'",
+
+  "mounts": [
+    "source=${localEnv:LLM_AUTH_TOKENS_DIR}/codex,target=/home/vscode/.codex,type=bind",
+    "source=${localEnv:LLM_AUTH_TOKENS_DIR}/claude,target=/home/vscode/.claude,type=bind",
+    "source=${localEnv:LLM_AUTH_TOKENS_DIR}/opencode-share,target=/home/vscode/.local/share/opencode,type=bind",
+    "source=${localEnv:LLM_AUTH_TOKENS_DIR}/opencode-config,target=/home/vscode/.config/opencode,type=bind"
+  ]
+}
