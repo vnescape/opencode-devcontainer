@@ -27,7 +27,7 @@
     "SSH_AUTH_SOCK": ""
   },
 
-  "postCreateCommand": "bash -lc 'sudo apt-get update && sudo apt-get install -y curl ca-certificates && sudo install -d -o vscode -g vscode /home/vscode/.local /home/vscode/.local/share /home/vscode/.opencode /home/vscode/.opencode/bin && curl -fsSL https://opencode.ai/install | bash && export PATH=/home/vscode/.opencode/bin:/home/vscode/.local/bin:$PATH && command -v opencode && opencode --version && echo \"set -s escape-time 10\" > ~/.tmux.conf'",
+  "postCreateCommand": "bash -lc 'sudo apt-get update && sudo apt-get install -y curl ca-certificates tmux && sudo install -d -o vscode -g vscode /home/vscode/.local /home/vscode/.local/share /home/vscode/.opencode /home/vscode/.opencode/bin && curl -fsSL https://opencode.ai/install | bash && export PATH=/home/vscode/.opencode/bin:/home/vscode/.local/bin:$PATH && command -v opencode && opencode --version && echo \"set -s escape-time 10\" > ~/.tmux.conf'",
 
   "mounts": [
     "source=${localEnv:LLM_AUTH_TOKENS_DIR}/codex,target=/home/vscode/.codex,type=bind",
